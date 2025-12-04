@@ -1,5 +1,5 @@
-from src.widget import mask_account_card, get_data
-
+from src.widget import get_data
+from src.widget import mask_account_card
 
 if __name__ == "__main__":
     print(mask_account_card('Счет 73654108430135874305'))
