@@ -19,16 +19,11 @@ if __name__ == "__main__":
 
 def get_data(date_str: str) -> str:
     """Функция принимает дату делает в формате ДД.ММ.ГГГГ"""
-    # parts_1 = date[:4]
-    # parts_2 = date[5:7]
-    # parts_3 = date[8:10]
-    #
-    # return parts_3 + "." + parts_2 + "." + parts_1
     only_date = date_str.split("T", 1)[0]
     year, month, day = only_date.split("-")
     return f"{day}.{month}.{year}"
 
 
-# еще один способ, как можно было бы сделать
+
 if __name__ == "__main__":
     print(get_data("2024-03-11T02:26:18.671407"))
