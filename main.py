@@ -1,8 +1,7 @@
-from src.widget import get_data
-from src.widget import mask_account_card
 from src.processing import filter_by_state
 from src.processing import sort_by_date
-
+from src.widget import get_data
+from src.widget import mask_account_card
 
 date = [
     {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
