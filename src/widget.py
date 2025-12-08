@@ -24,6 +24,5 @@ def get_data(date_str: str) -> str:
     return f"{day}.{month}.{year}"
 
 
-
 if __name__ == "__main__":
     print(get_data("2024-03-11T02:26:18.671407"))
