@@ -4,11 +4,14 @@ from typing import Union
 def get_mask_card_number(card: Union[str, int]) -> str:
     """Функция принимает номер карты и потом кодирует оставляя только начала и конец"""
     result = ""
-    new_card = str(card)
-    slice_card = new_card[6:13]
-    for new in slice_card:
-        new = new.replace(new, "*")
-        result += new
+    new_card = str(card).strip()
+    if len(new_card) == 16:
+        slice_card = new_card[6:13]
+        for new in slice_card:
+            new = new.replace(new, "*")
+            result += new
+    else:
+        return "Не правильный ввод карты"
 
     final_ = new_card[:6] + result + new_card[12:]
 
@@ -19,9 +22,16 @@ def get_mask_card_number(card: Union[str, int]) -> str:
 
 def get_mask_account(numbers: Union[str, int]) -> str:
     """Функция принимает номеер счета и потом кодирует оставляя только 4 полседнее номера"""
-    new_numbers = str(numbers)
-    slice_numbers = new_numbers[-4:]
+    new_numbers = str(numbers).strip()
+    if len(new_numbers) == 20:
+        slice_numbers = new_numbers[-4:]
+        final_2 = "**" + slice_numbers
 
-    final_2 = "**" + slice_numbers
+        return final_2
 
-    return final_2
+    else:
+
+        return "Не правильный ввод счета"
+
+
+
