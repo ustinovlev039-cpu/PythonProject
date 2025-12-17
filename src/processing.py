@@ -13,10 +13,6 @@ def filter_by_state(list_operation: list[dict], state: str = "EXECUTED") -> list
     return new_dictionary
 
 
-
-
-
-
 def sort_by_date(to_do_list: list[dict], reverse=True) -> list[dict]:
     """Функция должна возвращать новый список, отсортированный по дате (date)."""
     for item in to_do_list:
@@ -27,6 +23,3 @@ def sort_by_date(to_do_list: list[dict], reverse=True) -> list[dict]:
 
     result = sorted(to_do_list, key=lambda x: x["date"], reverse=reverse)
     return result
-
-
-

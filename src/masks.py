@@ -32,6 +32,3 @@ def get_mask_account(numbers: Union[str, int]) -> str:
     else:
 
         return "Не правильный ввод счета"
-
-
-
