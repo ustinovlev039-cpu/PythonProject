@@ -111,8 +111,66 @@ print(get_data("2024-03-11T02:26:18.671407"))
 - sort_by_date()
 - get_data()
 
+# Генераторные функции
 
+В проекте реализован модуль с генераторными функциями для обработки транзакций и генерации номеров банковских карт. Генераторы позволяют работать с данными последовательно, не загружая их полностью в память.
 
+## Функциональность
+
+### `filter_by_currency(transactions, value)`
+
+Генератор, который возвращает транзакции с заданной валютой.
+
+**Пример использования:**
+```python
+from generators import filter_by_currency
+
+transactions = [
+    {"id": 1, "currency": "RUB"},
+    {"id": 2, "currency": "USD"},
+]
+
+for transaction in filter_by_currency(transactions, "RUB"):
+    print(transaction)
+```
+
+**transaction_descriptions(transactions)**
+
+Генератор, который возвращает описание каждой транзакции.
+
+### Пример использования:
+
+```python
+from generators import transaction_descriptions
+
+transactions = [
+    {"description": "Оплата услуг"},
+    {"description": "Перевод средств"},
+]
+
+for description in transaction_descriptions(transactions):
+    print(description)
+```
+
+**card_number_generator(start, end)**
+
+Генератор, который формирует номера банковских карт в формате
+XXXX XXXX XXXX XXXX в заданном диапазоне.
+
+### Пример использования:
+
+```python
+from generators import card_number_generator
+
+for card in card_number_generator(1, 3):
+    print(card)
+```
+
+### Используемые технологии
+
+- Python 3.10+
+
+- typing
 
 
 
