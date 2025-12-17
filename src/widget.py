@@ -29,9 +29,6 @@ def get_data(date_str: str | int) -> str:
                 year, month, day = only_date.split("-")
                 return f"{day}.{month}.{year}"
             else:
-                return  "Не правильный ввод даты"
-
+                return "Не правильный ввод даты"
 
     return "Не правильный ввод даты"
-
-
