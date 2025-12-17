@@ -97,3 +97,13 @@ def ops_unknown_state():
         {"id": 70, "state": "PENDING", "date": "2019-01-01T00:00:00.000000"},
         {"id": 71, "state": "EXECUTED", "date": "2019-01-02T00:00:00.000000"},
     ]
+
+@pytest.fixture
+def transactions():
+    return [
+        {"id": 1, "currency": "USD", "description": "Coffee"},
+        {"id": 2, "currency": "EUR", "description": "Book"},
+        {"id": 3, "currency": "USD", "description": "Taxi"},
+        {"id": 4, "currency": "RUB"},
+        {"id": 5, "description": "No currency key"},
+    ]
