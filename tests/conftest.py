@@ -1,23 +1,24 @@
 import pytest
 
+
 @pytest.fixture
 def test_same_date():
-    return  (
-     {'id': 41428829, 'state': 'EXECUTED', 'date': '2019-07-03T18:35:29.512364'},
-     {'id': 615064591, 'state': 'CANCELED', 'date': '2019-07-03T18:35:29.512364'}
-     )
+    return (
+        {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
+        {"id": 615064591, "state": "CANCELED", "date": "2019-07-03T18:35:29.512364"},
+    )
+
 
 import pytest
-
 
 
 @pytest.fixture
 def ops_mixed_states_diff_dates():
     return [
         {"id": 1, "state": "EXECUTED", "date": "2019-01-03T10:00:00.000000"},
-        {"id": 2, "state": "CANCELED",  "date": "2018-12-30T12:00:00.000000"},
+        {"id": 2, "state": "CANCELED", "date": "2018-12-30T12:00:00.000000"},
         {"id": 3, "state": "EXECUTED", "date": "2020-05-01T09:30:00.000000"},
-        {"id": 4, "state": "CANCELED",  "date": "2019-01-01T00:00:00.000000"},
+        {"id": 4, "state": "CANCELED", "date": "2019-01-01T00:00:00.000000"},
     ]
 
 
@@ -59,6 +60,7 @@ def ops_unsorted_dates():
 def ops_empty():
     return []
 
+
 @pytest.fixture
 def ops_missing_date_key():
     return [
@@ -96,3 +98,13 @@ def ops_unknown_state():
         {"id": 71, "state": "EXECUTED", "date": "2019-01-02T00:00:00.000000"},
     ]
 
+
+@pytest.fixture
+def transactions():
+    return [
+        {"id": 1, "currency": "USD", "description": "Coffee"},
+        {"id": 2, "currency": "EUR", "description": "Book"},
+        {"id": 3, "currency": "USD", "description": "Taxi"},
+        {"id": 4, "currency": "RUB"},
+        {"id": 5, "description": "No currency key"},
+    ]
