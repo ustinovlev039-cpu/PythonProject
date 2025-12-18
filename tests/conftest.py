@@ -98,6 +98,7 @@ def ops_unknown_state():
         {"id": 71, "state": "EXECUTED", "date": "2019-01-02T00:00:00.000000"},
     ]
 
+
 @pytest.fixture
 def transactions():
     return [

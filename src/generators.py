@@ -2,11 +2,10 @@ from typing import Iterable
 
 
 def filter_by_currency(type_transfer: list[dict], value: str | int) -> Iterable[dict]:
-    """Генератор, возращающее  итератор, который поочередно выдает транзакции, где валюта операции соответствует заданной"""
+    """Генерато,который поочередно выдает транзакции, где валюта операции соответствует заданной"""
     for type_ in type_transfer:
         if type_.get("currency") == str(value):
             yield type_
-
 
 
 def transaction_descriptions(info_trans: list[dict]) -> Iterable[str]:
@@ -16,9 +15,8 @@ def transaction_descriptions(info_trans: list[dict]) -> Iterable[str]:
             yield info["description"]
 
 
-
-def card_number_generator(start: int | str, end: int| str) -> Iterable[str]:
-    """Функиця геенератор, генерирующее номер карты в формате XXXX XXXX XXXX XXXX, итервал, которой мы выбираем"""
+def card_number_generator(start: int | str, end: int | str) -> Iterable[str]:
+    """Функиця геенератор, генерирующее номер карты XXXX XXXX XXXX XXXX, итервал, которой мы выбираем"""
     start_int = int(start)
     end_int = int(end)
 
@@ -28,14 +26,9 @@ def card_number_generator(start: int | str, end: int| str) -> Iterable[str]:
         raise ValueError
 
     for number in range(start_int, end_int + 1):
-            digits = f"{number:016d}"
+        digits = f"{number:016d}"
 
-            yield f"{digits[:4]} {digits[4:8]} {digits[8:12]} {digits[12:16]}"
-
-
-
-
-
+        yield f"{digits[:4]} {digits[4:8]} {digits[8:12]} {digits[12:16]}"
 
 
 if __name__ == "__main__":

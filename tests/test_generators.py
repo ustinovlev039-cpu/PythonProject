@@ -1,8 +1,8 @@
 import pytest
 
+from src.generators import card_number_generator
 from src.generators import filter_by_currency
 from src.generators import transaction_descriptions
-from src.generators import card_number_generator
 
 
 @pytest.mark.parametrize(
@@ -45,7 +45,6 @@ def test_transaction_descriptions_returns_descriptions(data, expected):
 
 def test_transaction_descriptions_with_fixture(transactions):
     assert list(transaction_descriptions(transactions)) == ["Coffee", "Book", "Taxi", "No currency key"]
-
 
 
 @pytest.mark.parametrize(
