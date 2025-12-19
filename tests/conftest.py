@@ -9,9 +9,6 @@ def test_same_date():
     )
 
 
-import pytest
-
-
 @pytest.fixture
 def ops_mixed_states_diff_dates():
     return [
