@@ -1,13 +1,21 @@
 from functools import wraps
+from typing import Any
+from typing import Callable
+from typing import Optional
 
-def log(func=None, *, filename=None):
-    if func == None:
+
+def log(func: Optional[Callable : [str | int]] = None, *, filename: Optional[str] = None) -> Any:
+    """Декоратор логирует начало/конец выполнения функции, результат или ошибку.
+    Если filename задан — пишет в файл, иначе печатает в консоль."""
+    if func is None:
+
         def decorator(real_func):
             return log(real_func, filename=filename)
+
         return decorator
 
     def write(message: str):
-        if filename == None:
+        if filename is None:
             print(message)
         else:
             with open(filename, "a", encoding="utf-8") as file:
@@ -26,8 +34,3 @@ def log(func=None, *, filename=None):
             return result
 
     return wrapper
-
-
-
-
-
