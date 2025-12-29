@@ -1,6 +1,7 @@
 import pytest
-from src.widget import mask_account_card
+
 from src.widget import get_data
+from src.widget import mask_account_card
 
 
 @pytest.mark.parametrize(
