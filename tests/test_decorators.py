@@ -1,6 +1,7 @@
-
 import pytest
+
 from src.decorators import log
+
 
 def test_console_success(capsys):
     @log
@@ -15,7 +16,6 @@ def test_console_success(capsys):
     assert "result=7" in captured
 
 
-
 def test_console_error(capsys):
     @log
     def boom(x):
@@ -28,6 +28,7 @@ def test_console_error(capsys):
     assert "START boom" in captured
     assert "ERROR boom ValueError" in captured
     assert "args=(10,)" in captured
+
 
 def test_file_success(tmp_path):
     log_file = tmp_path / "app.log"
@@ -59,6 +60,7 @@ def test_file_error(tmp_path):
     assert "ERROR div ZeroDivisionError" in text
     assert "args=(1, 0)" in text
 
+
 def test_log_with_parentheses_works(capsys):
     @log()
     def f():
@@ -69,9 +71,3 @@ def test_log_with_parentheses_works(capsys):
     assert "START f" in captured
     assert "END f" in captured
     assert "result=ok" in captured
-
-
-
-
-
-
