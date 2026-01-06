@@ -1,14 +1,17 @@
 import json
 
 
-def info_transactions_json() -> list[dict]:
+def info_transactions_json(path: str) -> list[dict]:
     """Читает JSON с транзакциями и возвращает их"""
     try:
-        with open("data/operations.json") as f:
+        with open(path, "r", encoding="utf-8") as f:
             return json.load(f)
-    except json.JSONDecodeError:
+    except (json.JSONDecodeError, FileNotFoundError):
         return []
 
 
 if __name__ == "__main__":
-    print(info_transactions_json())
+    print(info_transactions_json("data/operations.json"))
+
+
+
