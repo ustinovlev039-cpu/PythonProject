@@ -10,22 +10,26 @@ load_dotenv()
 API_KEY = os.getenv("API_KEY")
 
 
-def filter_transactions(info: str, transactions: list[dict]) -> list[float] | None:
-    """Функция принимает транзакцию и возращает сумму транзакции"""
+def filter_utils(utils_transactions: list[dict], transaction_id: int) -> dict | None:
+    """Функция нахождение нужной транзакции"""
+    result = (transaction for transaction in utils_transactions if str(transaction.get("id")) == str(transaction_id))
+    found = next(result, None)
+    return found
 
-    paramsa = {"from": "from_cur", "to": "RUB", "amount": "amount"}
 
-    for dict_ in transactions:
-        if dict_.get("id") == int(info):
-            if dict_["operationAmount"]["currency"]["code"] in ("USD", "EUR"):
-                paramsa["from"] = dict_["operationAmount"]["currency"]["code"]
-                paramsa["amount"] = dict_["operationAmount"]["amount"]
-                return paramsa
+def filter_transactions(transaction: dict) -> float:
+    """Функция принимает транзакцию и возвращает транзакции или подготавливает к отправки на перевод"""
 
-            else:
-                return dict_["operationAmount"]["amount"]
+    info_filter = {"from": "from_cur", "to": "RUB", "amount": "amount"}
 
-    return None
+    if transaction["operationAmount"]["currency"]["code"] in ("USD", "EUR"):
+        info_filter["from"] = transaction["operationAmount"]["currency"]["code"]
+        info_filter["amount"] = transaction["operationAmount"]["amount"]
+        result = conversation(info_filter)
+        return result
+
+    else:
+        return float(transaction["operationAmount"]["amount"])
 
 
 def conversation(info_filter: dict) -> float:
@@ -34,11 +38,13 @@ def conversation(info_filter: dict) -> float:
     headers = {"apikey": API_KEY}
     responses = requests.get(url, headers=headers, params=info_filter)
     end_conversation = responses.json()
-    return end_conversation["result"]
+    return float(end_conversation["result"])
+
 
 
 if __name__ == "__main__":
-    test = info_transactions_json()
-    test_2 = filter_transactions("41428829", test)
-    # print(filter_transactions("441945886", test))
-    print(conversation(test_2))
+    test = info_transactions_json("data/operations.json")
+    print(filter_utils(test, 441945886))
+    #print(filter_transactions(test_2))
+
+
