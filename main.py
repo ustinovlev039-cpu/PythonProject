@@ -30,4 +30,3 @@ card = 8990922113665229
 if __name__ == "__main__":
     # print(filter_by_state(diction))
     print(get_mask_card_number(card))
-
