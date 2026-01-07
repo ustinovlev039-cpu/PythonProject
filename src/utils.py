@@ -12,6 +12,3 @@ def info_transactions_json(path: str) -> list[dict]:
 
 if __name__ == "__main__":
     print(info_transactions_json("data/operations.json"))
-
-
-

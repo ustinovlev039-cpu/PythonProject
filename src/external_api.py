@@ -41,10 +41,7 @@ def conversation(info_filter: dict) -> float:
     return float(end_conversation["result"])
 
 
-
 if __name__ == "__main__":
     test = info_transactions_json("data/operations.json")
     print(filter_utils(test, 441945886))
-    #print(filter_transactions(test_2))
-
-
+    # print(filter_transactions(test_2))
