@@ -19,7 +19,3 @@ def info_transactions_json(path: str) -> list[dict]:
     except (json.JSONDecodeError, FileNotFoundError) as error:
         logger.info(f"Произошла ошибки {error}")
         return []
-
-
-if __name__ == "__main__":
-    print(info_transactions_json("data/operations.json"))
