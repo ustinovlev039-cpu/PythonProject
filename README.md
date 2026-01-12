@@ -181,7 +181,7 @@ for card in card_number_generator(1, 3):
   {"id": "2", "state": "CANCELED", "amount": "50.0", ...},
 ]
 ~~~
-
+ 
 ### Используемые технологии
 
 - Python 3.10+
