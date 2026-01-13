@@ -32,7 +32,7 @@ def get_mask_card_number(card: Union[str, int]) -> str:
 
 
 def get_mask_account(numbers: Union[str, int]) -> str:
-    """Функция принимает номеер счета и потом кодирует оставляя только 4 полседнее номера"""
+    """Функция принимает номер счета и потом кодирует оставляя только 4 последние номера"""
     new_numbers = str(numbers).strip()
     logging.info("Проверка на правильности ввода счета")
     if len(new_numbers) == 20:
