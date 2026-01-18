@@ -8,6 +8,9 @@ from src.utils_csv_xlsx import info_transactions_xlsx
 
 def process_bank_search(data:list[dict], search:str)->list[dict]:
     """Ищет в банковских операциях нужную заданную строку"""
+    if not data:
+        return []
+    
     result = []
     pattern = re.escape(search)
     for op in data:
