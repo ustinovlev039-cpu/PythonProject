@@ -1,7 +1,7 @@
 def filter_by_state(list_operation: list[dict], state: str = "EXECUTED") -> list[dict]:
     """Функция возвращает новый список словарей, содержащий только те словари, у которых ключ
     state соответствует указанному значению."""
-    allowed = ("EXECUTED", "CANCELED")
+    allowed = ("EXECUTED", "CANCELED", "PENDING")
     if state not in allowed:
         raise ValueError("Не правильный ввод state")
 
