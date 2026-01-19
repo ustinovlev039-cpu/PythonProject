@@ -6,11 +6,11 @@ from src.utils_csv_xlsx import info_transactions_csv
 from src.utils_csv_xlsx import info_transactions_xlsx
 
 
-def process_bank_search(data:list[dict], search:str)->list[dict]:
+def process_bank_search(data: list[dict], search: str) -> list[dict]:
     """Ищет в банковских операциях нужную заданную строку"""
     if not data:
         return []
-    
+
     result = []
     pattern = re.escape(search)
     for op in data:
@@ -20,7 +20,8 @@ def process_bank_search(data:list[dict], search:str)->list[dict]:
 
     return result
 
-def process_bank_operations(data:list[dict], category:list)->dict:
+
+def process_bank_operations(data: list[dict], category: list) -> dict:
     """Считает количество заданной операции"""
     count = defaultdict(int)
     for op in data:
@@ -31,17 +32,8 @@ def process_bank_operations(data:list[dict], category:list)->dict:
     return count
 
 
-
-
-
 if __name__ == "__main__":
     test_1 = info_transactions_json("data/operations.json")
-    #print(process_bank_search(test_1, "Перевод организации"))
-    #categories = ["Перевод организации", "Открытие вклада", "Перевод со счета на счет"]
+    # print(process_bank_search(test_1, "Перевод организации"))
+    # categories = ["Перевод организации", "Открытие вклада", "Перевод со счета на счет"]
     print(process_bank_operations(test_1, categories))
-
-
-
-
-
-

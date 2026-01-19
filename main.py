@@ -5,37 +5,37 @@ from src.utils import info_transactions_json
 from src.widget import mask_account_card, get_data
 
 
-def type_file():
-    """Диалог выбора источника данных (JSON/CSV/XLSX) и загрузка транзакций"""
+def type_file() -> list[dict]:
+    """Диалог о выборе формата """
     print("Привет! Добро пожаловать в программу работы с банковскими транзакциями.")
     print("Выберите необходимый пункт меню:")
 
     while True:
         ans_type = input(
             """
-        1. Получить информацию о транзакции из JSON-файла.
-        2. Получить информацию о транзакциях из CSV-файла.
-        3. Получить информацию о транзакциях из XLSX-файла.
-        """
+1. Получить информацию о транзакции из JSON-файла.
+2. Получить информацию о транзакциях из CSV-файла.
+3. Получить информацию о транзакциях из XLSX-файла.
+"""
         ).strip()
 
-        if ans_type in ("1", "2", "3"):
-            if ans_type == "1":
-                print("Для обработки выбран JSON-файл.")
-                return info_transactions_json("data/operations.json")
-            elif ans_type == "2":
-                print("Для обработки выбран CSV-файл.")
-                return info_transactions_csv("data/transactions.csv")
-            else:
-                print("Для обработки выбран XLSX-файл.")
-                return info_transactions_xlsx("data/transactions_excel.xlsx")
+        if ans_type == "1":
+            print("Для обработки выбран JSON-файл.")
+            return info_transactions_json("data/operations.json")
+        if ans_type == "2":
+            print("Для обработки выбран CSV-файл.")
+            return info_transactions_csv("data/transactions.csv")
+        if ans_type == "3":
+            print("Для обработки выбран XLSX-файл.")
+            return info_transactions_xlsx("data/transactions_excel.xlsx")
 
         print("Не правильный ввод, попробуйте еще раз")
 
 
-def input_status():
+def input_status() -> str:
+    """Запрашивает статус для фильтрации и возвращает его в верхнем регистре."""
+    allowed = ("EXECUTED", "CANCELED", "PENDING")
     while True:
-        status = ("EXECUTED", "CANCELED", "PENDING")
         ans_finding = input(
             """
 Введите статус, по которому необходимо выполнить фильтрацию.
@@ -43,22 +43,22 @@ def input_status():
 """
         )
         normalize = ans_finding.upper().strip()
-        if normalize in status:
+        if normalize in allowed:
             print(f"Операции отфильтрованы по статусу '{normalize}'")
             return normalize
-        else:
-            print(f"Статус операции '{ans_finding.strip()}' недоступен.")
+
+        print(f"Статус операции '{ans_finding.strip()}' недоступен.")
 
 
 def only_digits(text: str) -> str:
+    """Оставляет в строке только цифры."""
     return "".join(ch for ch in str(text) if ch.isdigit())
 
 
 def currency_code(op: dict) -> str:
-    # Для CSV/XLSX
+    """Возвращает валюту и поддерживает, все выбранные форматы."""
     if "currency_code" in op:
         return str(op.get("currency_code", ""))
-    # Для JSON
     try:
         return op["operationAmount"]["currency"]["code"]
     except Exception:
@@ -66,17 +66,16 @@ def currency_code(op: dict) -> str:
 
 
 def amount(op: dict) -> str:
-    # Для CSV/XLSX
-    if "amount" in op:
+    """Возвращает сумму операции во всех выборных форматах."""
+    if "amount" in op:  # CSV/XLSX
         return str(op.get("amount"))
-    # Для JSON
-    try:
+    try:  # JSON
         return str(op["operationAmount"]["amount"])
     except Exception:
         return ""
 
 
-def main():
+def main() -> None:
     files = type_file()
     result_status = input_status()
 
@@ -85,15 +84,9 @@ def main():
     ans_sort = input("Отсортировать операции по дате? Да/Нет\n")
     if ans_sort.lower().strip() == "да":
         ans_sort_type = input("Отсортировать по возрастанию или по убыванию?\n")
-
-        if ans_sort_type.lower().strip() == "по возрастанию":
-            reverse_flag = False
-        else:
-            reverse_flag = True
-
+        reverse_flag = ans_sort_type.lower().strip() != "по возрастанию"
         list_operation = sort_by_date(list_operation, reverse_flag)
 
-    # Важно: transaction задаем всегда, чтобы не было ошибки "не определена"
     transaction = list_operation
 
     ans_type_transaction = input("Выводить только рублевые транзакции? Да/Нет\n")
